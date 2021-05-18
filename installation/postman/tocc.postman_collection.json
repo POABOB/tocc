@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "5a483a7d-422c-441c-b50e-3f0314d410a8",
+		"name": "tocc",
+		"description": "tocc api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "新增表單內容",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"identity\": \"1\",\n    \"travel_histroy\": \"1\",\n    \"travel_country\": \"香港\",\n    \"occupation\": \"6\",\n    \"occupation_other\": \"前端工程師\",\n    \"contact_history\": [\n        4,\n        6\n    ],\n    \"contact_multi\": \"1\",\n    \"contact_other\": \"公司\",\n    \"cluster\": [\n        1,\n        2\n    ],\n    \"cluster_multi\": \"2\",\n    \"cluster_date\": \"2020-05-02\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/add?cusid=3701013348",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"add"
+					],
+					"query": [
+						{
+							"key": "cusid",
+							"value": "3701013348"
+						}
+					]
+				},
+				"description": "插入範例和命名\n{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"identity\": \"1\", //0:就診, 1:陪同, 2:其他\n    \"travel_histroy\": \"1\", //0:無, 1: 曾出國\n    \"travel_country\": \"香港\", //出國的國家名稱, history為1時必填\n    \"occupation\": \"6\",//0:無, 1,2,3,4,5,6: 其他\n    \"occupation_other\":\"前端工程師\",//其他職業(可null, 6被勾選擇必填)\n    \"contact_history\":[4,6], //接觸史 array 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他\n    \"contact_multi\": \"1\", //0,1\n    \"contact_other\": \"公司\",//其他接觸史(可null, 6被勾選擇必填)\n    \"cluster\": [1,2],//群聚 0:無, 1(如果勾選，則cluster_multi裡頭加入),2,3,4\n    \"cluster_multi\": \"2\",//0,1,2\n    \"cluster_date\": \"2020-05-02\"//自主健康管理日期(yyyy-mm-dd) 如果cluster為2時必填\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "獲取表單列表",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/list?cusid=3701013348&month=2021-05",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"list"
+					],
+					"query": [
+						{
+							"key": "cusid",
+							"value": "3701013348"
+						},
+						{
+							"key": "month",
+							"value": "2021-05"
+						}
+					]
+				},
+				"description": "get form list"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

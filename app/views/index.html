@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實聯制登記 - 表單填寫</title>
+    <!-- site_url 為返回assets資料夾路徑 -->
+    <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}">
+</head>
+<div>
+    <h1 id="cusname"></h1>
+</div>
+<body>
+    <!-- site_url 為返回assets資料夾路徑 -->
+    <script src="{{ '/js/index.js'|site_url }}"></script>
+    <script>
+        //php 返回診所名稱和id
+        var customer_data = {
+            'cusname': "{{ data['cusname']|raw }}",
+            'cusid': "{{ data['cusid']|raw }}"
+        }
+        console.log(customer_data);
+        if(customer_data['cusname'] !== "") {
+            document.getElementById('cusname').innerHTML = customer_data['cusname']
+        } else {
+            alert("請確認id是否正確!")
+        }
+        
+    </script>
+</body>
+</html>
