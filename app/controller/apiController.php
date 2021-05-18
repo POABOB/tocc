@@ -19,7 +19,7 @@ class apiController extends \core\PPP {
             '*', 
             array(
                 'cusid' => $cusid,
-                'created_at[~]' => $month
+                // 'created_at[~]' => $month
             )
         );
 
