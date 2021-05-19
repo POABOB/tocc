@@ -84,31 +84,31 @@ class apiController extends \core\PPP {
             return;
         }
 
-        // //資料處理
-        // $return = $database->add(
-        //     array(
-        //         "name" => $post["name"],
-        //         "cellphone" => $post["cellphone"],
-        //         "identity" => $post["identity"], //0:就診, 1:陪同, 2:其他
-        //         "travel_histroy" => $post["travel_histroy"], //0:無, 1=> 曾出國
-        //         "travel_country" => $post["travel_country"], //出國的國家名稱, history為1時必填
-        //         "occupation" => $post["occupation"],//0:無, 1,2,3,4,5,6=> 其他
-        //         "occupation_other" => $post["occupation_other"],//其他職業(可null, 其他被勾選擇必填)
-        //         "contact_history" => json_encode($post["contact_history"]), //接觸史 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他
-        //         "contact_multi" => $post["contact_multi"], //0,1
-        //         "contact_other" => $post["contact_other"],//其他接觸史(可null, 其他被勾選擇必填)
-        //         "cluster" => json_encode($post["cluster"]),//群聚 0:無, 1(如果勾選，則cluster_multi裡頭加入),2,3,4
-        //         "cluster_multi" => $post["cluster_multi"],//0,1,2
-        //         "cluster_date"=> $post["cluster_date"],//自主健康管理日期(yyyy-mm-dd) 如果cluster為2時必填
-        //         "ip_addr" => get_IP(),
-        //         "cusid" => $cusid
-        //     )
-        // );
+        //資料處理
+        $return = $database->add(
+            array(
+                "name" => $post["name"],
+                "cellphone" => $post["cellphone"],
+                "identity" => $post["identity"], //0:就診, 1:陪同, 2:其他
+                "travel_histroy" => $post["travel_histroy"], //0:無, 1=> 曾出國
+                "travel_country" => $post["travel_country"], //出國的國家名稱, history為1時必填
+                "occupation" => $post["occupation"],//0:無, 1,2,3,4,5,6=> 其他
+                "occupation_other" => $post["occupation_other"],//其他職業(可null, 其他被勾選擇必填)
+                "contact_history" => json_encode($post["contact_history"]), //接觸史 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他
+                "contact_multi" => $post["contact_multi"], //0,1
+                "contact_other" => $post["contact_other"],//其他接觸史(可null, 其他被勾選擇必填)
+                "cluster" => json_encode($post["cluster"]),//群聚 0:無, 1(如果勾選，則cluster_multi裡頭加入),2,3,4
+                "cluster_multi" => $post["cluster_multi"],//0,1,2
+                "cluster_date"=> $post["cluster_date"],//自主健康管理日期(yyyy-mm-dd) 如果cluster為2時必填
+                "ip_addr" => get_IP(),
+                "cusid" => $cusid
+            )
+        );
 
-		// if($return) {
-		// 	json(new resModel(200, '表單提交成功!'));
-		// 	return;
-		// }
+		if($return) {
+			json(new resModel(200, '表單提交成功!'));
+			return;
+		}
 		json(new resModel(400, '請確認id是否正確!'));
 	}
 }
