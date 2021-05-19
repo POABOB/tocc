@@ -7,8 +7,13 @@ use app\model\viewsModel;
  *
  */
 class viewsController extends \core\PPP {
+    //視圖首頁
+    public function index() {
+        
+    }
+
 	//GET 表單視圖
-	public function index() {
+	public function customer() {
         $data = $this->get_customer();
         $this->assign('data', array('cusname' => $data['cusname'], 'cusid' => $data['cusid']));
 		$this->display('index.html');

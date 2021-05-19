@@ -5,6 +5,7 @@ use core\common\auth;
 
 //views
 $router->get('/', 'viewsController@index');
+$router->get('/customer', 'viewsController@customer');
 $router->get('/list', 'viewsController@list');
 
 //api
