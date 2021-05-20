@@ -4,33 +4,31 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78678f9558ffe2fdfbb0c90ea7e91c38",
+    "content-hash": "b8d1a0af74d854204c43bae5288e696e",
     "packages": [
         {
             "name": "catfan/medoo",
-            "version": "v2.0.1",
+            "version": "v1.7.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/catfan/Medoo.git",
-                "reference": "2d0345be643e67f8d43acb282bf9a882e8e9971a"
+                "reference": "2d675f73e23f63bbaeb9a8aa33318659a3d3c32f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/catfan/Medoo/zipball/2d0345be643e67f8d43acb282bf9a882e8e9971a",
-                "reference": "2d0345be643e67f8d43acb282bf9a882e8e9971a",
+                "url": "https://api.github.com/repos/catfan/Medoo/zipball/2d675f73e23f63bbaeb9a8aa33318659a3d3c32f",
+                "reference": "2d675f73e23f63bbaeb9a8aa33318659a3d3c32f",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
-                "php": ">=7.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
+                "php": ">=5.4"
             },
             "suggest": {
                 "ext-pdo_dblib": "For MSSQL or Sybase database on Linux/UNIX platform",
                 "ext-pdo_mysql": "For MySQL or MariaDB database",
                 "ext-pdo_oci": "For Oracle database",
+                "ext-pdo_oci8": "For Oracle version 8 database",
                 "ext-pdo_pqsql": "For PostgreSQL database",
                 "ext-pdo_sqlite": "For SQLite database",
                 "ext-pdo_sqlsrv": "For MSSQL database on both Window/Liunx platform"
@@ -38,7 +36,7 @@
             "type": "framework",
             "autoload": {
                 "psr-4": {
-                    "Medoo\\": "src/"
+                    "Medoo\\": "/src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -48,7 +46,7 @@
             "authors": [
                 {
                     "name": "Angel Lai",
-                    "email": "angel@medoo.in"
+                    "email": "angel@catfan.me"
                 }
             ],
             "description": "The lightweight PHP database framework to accelerate development",
@@ -66,7 +64,7 @@
                 "sql",
                 "sqlite"
             ],
-            "time": "2021-05-12T17:55:47+00:00"
+            "time": "2020-02-11T08:20:42+00:00"
         },
         {
             "name": "doctrine/lexer",

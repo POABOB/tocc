@@ -99,7 +99,7 @@ function site_url($string = '/')
 			$string = '/'.$string;
 		}
 	}
-	return HTTP.$_SERVER['SERVER_NAME'].URL.'/app/views/assets'.$string;
+	return HTTP.$_SERVER['HTTP_HOST'].URL.'/app/views/assets'.$string;
 }
 
 function get_chinese_weekday($datetime)
