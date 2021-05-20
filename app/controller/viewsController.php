@@ -25,7 +25,8 @@ class viewsController extends \core\PPP {
         $this->assign('data', array('cusname' => $data['cusname'], 'cusid' => $data['cusid']));
 		$this->display('list.html');
     }
-    //獲取customer
+
+    //function 獲取customer
     private function get_customer() {
         $cusid = get('cusid') ? get('cusid') : null;
         $database = new viewsModel();
@@ -37,5 +38,19 @@ class viewsController extends \core\PPP {
             $data['cusid'] = $cusid;
         }
         return $data;
+    }
+
+    //GET 登入視圖
+    public function login() {
+        $this->display('login.html');
+    }
+
+    //GET 所有customer列表視圖
+    public function clinic_list() {
+        //獲取所有診所對應網址
+        $database = new viewsModel();
+        $data = $database->find_cus('*', 1);
+        $this->assign('data', $data);
+        $this->display('clinic_list.html');
     }
 }

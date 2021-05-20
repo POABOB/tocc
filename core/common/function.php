@@ -226,3 +226,11 @@ function get_IP(){
     }
     return $cip;
    }
+//redirect
+function redirect($url = '/')
+{
+    $url =  base_url($url);
+    // var_dump($url);
+    header("Location: $url");
+    exit();
+}

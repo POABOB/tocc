@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實聯制登記 - 後台登入</title>
+    <!-- site_url 為返回assets資料夾路徑 -->
+    <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}">
+</head>
+<body>
+    <div style="text-align: center;">
+        <form name='form' onsubmit='return Submit();'>
+            <label for="account">登入碼</label>
+            <input id="account" name="account" type="text">
+            <button type="submit">登入</button>
+        </form>
+    </div>
+    <!-- site_url 為返回assets資料夾路徑 -->
+    <script src="{{ '/js/index.js'|site_url }}"></script>
+    <script>
+        function Submit() {
+            event.preventDefault()
+            const account = document.forms["form"]["account"].value;
+            if(account.length < 1 || account.length > 128) {
+                alert('請輸入登入碼並確認是否超過128字元!');
+            } else {
+                let data = { account: account };
+                fetch("{{ '/login'|base_url }}", {
+                    method: "POST", 
+                    body: JSON.stringify(data),
+                    headers: new Headers({'content-type': 'application/json'}),
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if(res.code === 200) {
+                        location.href = "{{ '/clinic/list'|base_url }}";
+                    } else {
+                        alert(res.message);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
