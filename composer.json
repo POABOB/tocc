@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
         "name": "php/ppp",
         "description": "PHP Framework",
         "Type": "Framework",
@@ -13,3 +14,19 @@
                 "twig/twig": "*"
         }
 }
+=======
+    "name": "php/ppp",
+    "description": "PHP Framework",
+    "Type": "Framework",
+    "keywords": [
+            "PHP", "PHP Framework"
+    ],
+    "require": {
+            "php": ">=5.3.0",
+            "filp/whoops":"*",
+            "catfan/medoo": "^1.7.10",
+            "swiftmailer/swiftmailer": "^6.0",
+            "twig/twig": "*"
+    }
+}
+>>>>>>> 887821222490fe5b852968fb2a8c3737c583cdde
