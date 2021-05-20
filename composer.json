@@ -1,16 +1,15 @@
 {
-	"name": "php/ppp",
-	"description": "PHP Framework",
-	"type": "Framework",
-	"keywords": [
-		"PHP", "PHP Framework"
-	],
-	"require": {
-		"php": ">=5.3.0",
-		"filp/whoops":"*",
-		"catfan/medoo": "1.7.10",
-        "swiftmailer/swiftmailer": "^6.0",
-        "twig/twig": "*"
-	}
-
+        "name": "php/ppp",
+        "description": "PHP Framework",
+        "Type": "Framework",
+        "keywords": [
+                "PHP", "PHP Framework"
+        ],
+        "require": {
+                "php": ">=5.3.0",
+                "filp/whoops":"*",
+                "catfan/medoo": "^1.7.10",
+                "swiftmailer/swiftmailer": "^6.0",
+                "twig/twig": "*"
+        }
 }
