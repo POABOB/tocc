@@ -11,9 +11,21 @@
     table { border-collapse:collapse; width:100%; }
     th { background:#F5F5F5; }
     td,th { border:1px solid #DDD; padding:10px; text-align: center;}
+    .rwd {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        padding: 1rem 0;
+    }
+    @media only screen and (min-width: 968px) {
+        .rwd {
+            padding: 1rem 3rem;
+        }
+    }
 </style>
 <body>
-    <div style="margin: 1rem 3rem;">
+    <div class="rwd">
         <table>
             <thead>
                 <tr>
