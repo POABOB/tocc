@@ -21,7 +21,7 @@ class auth
 
 	//user
 	public function user($msg = 'login not yet', $ret = 0) {
-		if(!(isset($_SESSION['user'])))
+		if(!($_SESSION['user'] === true))
 		{
 			if($ret == 0) {
                 json(new resModel(401, $msg));

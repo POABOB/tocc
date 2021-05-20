@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>實聯制登記 - 統計登入</title>
+    <title>實聯制登記 - 後台登入</title>
     <!-- site_url 為返回assets資料夾路徑 -->
     <!-- <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}"> -->
 </head>
 <body>
     <div style="text-align: center;">
-        <h1>統計登入</h1>
+        <h1>後台登入</h1>
         <form name='form' onsubmit='return Submit();'>
             <label for="account">登入碼</label>
             <input id="account" name="account" type="password">
@@ -19,25 +19,14 @@
     <!-- site_url 為返回assets資料夾路徑 -->
     <!-- <script src="{{ '/js/index.js'|site_url }}"></script> -->
     <script>
-        //php 返回診所名稱和id
-        var customer_data = {
-            'cusname': "{{ data['cusname']|raw }}",
-            'cusid': "{{ data['cusid']|raw }}"
-        }
-        console.log(customer_data);
-        if(customer_data['cusname'] !== "") {
-            document.getElementById('cusname').innerHTML = customer_data['cusname']
-        } else {
-            alert("請確認id是否正確!")
-        }
         function Submit() {
             event.preventDefault()
             const account = document.forms["form"]["account"].value;
-            if(account.length < 1 || account.length > 20) {
-                alert('請輸入登入碼並確認是否超過20字元!');
+            if(account.length < 1 || account.length > 128) {
+                alert('請輸入登入碼並確認是否超過128字元!');
             } else {
                 let data = { account: account };
-                fetch("{{ '/login'|base_url }}?cusid=" + customer_data['cusid'], {
+                fetch("{{ '/clinic/login'|base_url }}", {
                     method: "POST", 
                     body: JSON.stringify(data),
                     headers: new Headers({'content-type': 'application/json'}),
@@ -45,7 +34,7 @@
                 .then(res => res.json())
                 .then(res => {
                     if(res.code === 200) {
-                        location.href = "{{ '/list'|base_url }}?cusid=" + customer_data['cusid'];
+                        location.href = "{{ '/clinic/list'|base_url }}";
                     } else {
                         alert(res.message);
                     }
