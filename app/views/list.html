@@ -5,27 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>實聯制登記 - 表單列表</title>
     <!-- site_url 為返回assets資料夾路徑 -->
+    <link rel="stylesheet" href="{{ '/css/bootstrap.min.css'|site_url }}">
     <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}">
 </head>
-<div>
-    <h1 id="cusname"></h1>
-</div>
-<body>
-    <!-- site_url 為返回assets資料夾路徑 -->
-    <script src="{{ '/js/index.js'|site_url }}"></script>
-    <script>
-        //php 返回診所名稱和id
-        var customer_data = {
-            'cusname': "{{ data['cusname']|raw }}",
-            'cusid': "{{ data['cusid']|raw }}"
-        }
-        console.log(customer_data);
-        if(customer_data['cusname'] !== "") {
-            document.getElementById('cusname').innerHTML = customer_data['cusname']
-        } else {
-            alert("請確認id是否正確!")
-        }
+
+<body style="display: none;">
+    <div class="container" style="padding-top: 20px;">
+        <h1 class="mb-3">實聯制登記 - 表單列表 <span id="cusname"></span> </h1>
+        <div class="flex f-row jcs aic mb-3">
+            <span>月份搜尋：</span>
+            <input id="date" type="date" onchange="getList()">
+        </div>
         
-    </script>
+        <table id="list" class="list table table-striped table-hover table-bordered">
+            <thead>
+                <th width="10%">登記時間</th>
+                <th width="10%">姓名</th>
+                <th width="10%">電話</th>
+                <th width="5%">身份</th>
+                <th width="10%">最近14日內旅遊史？</th>
+                <th width="15%">你的職業別為何？</th>
+                <th width="20%">您近期接觸及出入場所？</th>
+                <th width="20%">您近一個月內群聚史？</th>
+            </thead>
+            <tbody>
+                <tr></tr>
+            </tbody>
+        </table>
+    </div>
+    
 </body>
+<!-- site_url 為返回assets資料夾路徑 -->
+<script src="{{ '/js/jquery.min.js'|site_url }}"></script>
+<script src="{{ '/js/bootstrap.min.js'|site_url }}"></script>
+<script src="{{ '/js/axios.min.js'|site_url }}"></script>
+<script src="{{ '/js/list.js'|site_url }}"></script>
+<script>
+    //php 返回診所名稱和id
+    var customer_data = {
+        'cusname': "{{ data['cusname']|raw }}",
+        'cusid': "{{ data['cusid']|raw }}",
+        'session': "{{ session['user'] }}"
+    }
+    if(customer_data['cusname'] !== "") {
+        document.getElementById('cusname').innerHTML = customer_data['cusname']
+        if(customer_data['session'] === 'leyan' + customer_data['cusid']) {
+            getDate();
+            getList();
+            $("body").css('display', 'block');
+        } else {
+            if(prompt('請輸入登入碼:', '') === 'leyan' + customer_data['cusid']) {
+                let data = {'account': 'leyan' + customer_data['cusid']};
+                fetch("{{ '/login?cusid='|base_url }}"+customer_data['cusid'], {
+                    method: "POST", 
+                    body: JSON.stringify(data),
+                    headers: new Headers({'content-type': 'application/json'}),
+                })
+                .then(res => res.json())
+                .then(res => {
+                    alert(res.message);
+                    location.reload();
+                });
+            } else {
+                alert('登入碼錯誤，請重新整理再試...');
+            }
+        }
+    } else {
+        alert("請確認id是否正確!");
+    }
+    
+</script>
 </html>
