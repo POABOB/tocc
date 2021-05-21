@@ -43,6 +43,7 @@ class apiController extends \core\PPP {
                 '姓名' => $post['name'], 
                 '手機號碼' => $post['cellphone'],
                 '身份' => $post['identity'],
+                '居住地' => $post['residence'],
                 '旅遊史' => $post['travel_histroy'],
                 '職業別' => $post['occupation'],
                 '出入場所' => $post['contact_history'],
@@ -51,6 +52,7 @@ class apiController extends \core\PPP {
             array(
                 '姓名' => array('required', 'maxLen' => 128),
                 '手機號碼' => array('required', 'maxLen' => 15),
+                '居住地' => array('required', 'maxLen' => 256),
                 '身份' => array('required', 'maxLen' => 3),
                 '旅遊史' => array('required'),
                 '職業別' => array('required'),
@@ -66,6 +68,9 @@ class apiController extends \core\PPP {
         //勾選規則
         if(intval($post['travel_histroy']) == 1 && $post['travel_country'] == null) {
             json(new resModel(401, '請填寫國家!'));
+            return;
+        } else if(intval($post['travel_histroy']) == 2 && $post['travel_destination'] == null) {
+            json(new resModel(401, '請填寫旅遊地!'));
             return;
         } else if(intval($post['occupation']) == 6 && $post['occupation_other'] == null) {
             json(new resModel(401, '請填寫職業!'));
@@ -89,9 +94,11 @@ class apiController extends \core\PPP {
             array(
                 "name" => $post["name"],
                 "cellphone" => $post["cellphone"],
+                "residence" => $post["residence"],
                 "identity" => $post["identity"], //0:就診, 1:陪同, 2:其他
                 "travel_histroy" => $post["travel_histroy"], //0:無, 1=> 曾出國
                 "travel_country" => $post["travel_country"], //出國的國家名稱, history為1時必填
+                "travel_destination" => $post["travel_destination"], //旅遊地, history為2時必填
                 "occupation" => $post["occupation"],//0:無, 1,2,3,4,5,6=> 其他
                 "occupation_other" => $post["occupation_other"],//其他職業(可null, 其他被勾選擇必填)
                 "contact_history" => json_encode($post["contact_history"]), //接觸史 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他
