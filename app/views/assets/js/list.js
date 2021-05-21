@@ -80,5 +80,3 @@ function getDate () {
     var date = y+'-'+m+'-'+d;
     $('#date').val(date);
 }
-getDate();
-getList();

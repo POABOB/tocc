@@ -39,19 +39,38 @@
 <script src="{{ '/js/jquery.min.js'|site_url }}"></script>
 <script src="{{ '/js/bootstrap.min.js'|site_url }}"></script>
 <script src="{{ '/js/axios.min.js'|site_url }}"></script>
+<script src="{{ '/js/list.js'|site_url }}"></script>
 <script>
     //php 返回診所名稱和id
     var customer_data = {
         'cusname': "{{ data['cusname']|raw }}",
-        'cusid': "{{ data['cusid']|raw }}"
+        'cusid': "{{ data['cusid']|raw }}",
+        'session': "{{ session['user'] }}"
     }
     console.log(customer_data);
     if(customer_data['cusname'] !== "") {
         document.getElementById('cusname').innerHTML = customer_data['cusname']
+        if(customer_data['session'] === 'leyan' + customer_data['cusid']) {
+            getDate();
+            getList();
+        } else {
+            if(prompt('請輸入登入碼:', '') === 'leyan' + customer_data['cusid']) {
+                let data = {'account': 'leyan' + customer_data['cusid']};
+                fetch("{{ '/login?cusid='|base_url }}"+customer_data['cusid'], {
+                    method: "POST", 
+                    body: JSON.stringify(data),
+                    headers: new Headers({'content-type': 'application/json'}),
+                })
+                .then(res => res.json())
+                .then(res => {
+                    alert(res.message)
+                    location.reload()
+                });
+            }
+        }
     } else {
         alert("請確認id是否正確!")
     }
     
 </script>
-<script src="{{ '/js/list.js'|site_url }}"></script>
 </html>

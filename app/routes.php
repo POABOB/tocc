@@ -7,18 +7,8 @@ if(!isset($_SESSION['user'])) {
     $_SESSION['user'] = false;
 }
 
-//統計登入 views&api
-$router->get('/login', 'viewsController@login');
+//統計登入 api
 $router->post('/login', 'apiController@login');
-
-//middleware 判斷是否登入
-$router->before('GET', '/list', function() {
-    $cusid = get('cusid') ? get('cusid') : null;
-    if('leyan' . $cusid !== $_SESSION['user']) {
-        $_SESSION['user'] = false;
-        redirect('/login?cusid=' . $cusid);
-    }
-});
 
 //views
 $router->get('/', 'viewsController@index');
