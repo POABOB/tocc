@@ -13,19 +13,19 @@
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					},
 					{
 						"key": "",
-						"value": "",
 						"type": "text",
+						"value": "",
 						"disabled": true
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"identity\": \"1\",\n    \"travel_histroy\": \"1\",\n    \"travel_country\": \"香港\",\n    \"occupation\": \"6\",\n    \"occupation_other\": \"前端工程師\",\n    \"contact_history\": [\n        4,\n        6\n    ],\n    \"contact_multi\": \"1\",\n    \"contact_other\": \"公司\",\n    \"cluster\": [\n        1,\n        2\n    ],\n    \"cluster_multi\": \"2\",\n    \"cluster_date\": \"2020-05-02\"\n}",
+					"raw": "{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"residence\": \"台中市\",\n    \"identity\": \"1\",\n    \"travel_histroy\": \"1\",\n    \"travel_country\": \"香港\",\n    \"travel_destination\": \"\",\n    \"occupation\": \"6\",\n    \"occupation_other\": \"前端工程師\",\n    \"contact_history\": [\n        4,\n        6\n    ],\n    \"contact_multi\": \"1\",\n    \"contact_other\": \"公司\",\n    \"cluster\": [\n        1,\n        2\n    ],\n    \"cluster_multi\": \"2\",\n    \"cluster_date\": \"2020-05-02\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,7 +48,7 @@
 						}
 					]
 				},
-				"description": "插入範例和命名\n{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"identity\": \"1\", //0:就診, 1:陪同, 2:其他\n    \"travel_histroy\": \"1\", //0:無, 1: 曾出國\n    \"travel_country\": \"香港\", //出國的國家名稱, history為1時必填\n    \"occupation\": \"6\",//0:無, 1,2,3,4,5,6: 其他\n    \"occupation_other\":\"前端工程師\",//其他職業(可null, 6被勾選擇必填)\n    \"contact_history\":[4,6], //接觸史 array 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他\n    \"contact_multi\": \"1\", //0,1\n    \"contact_other\": \"公司\",//其他接觸史(可null, 6被勾選擇必填)\n    \"cluster\": [1,2],//群聚 0:無, 1(如果勾選，則cluster_multi裡頭加入),2,3,4\n    \"cluster_multi\": \"2\",//0,1,2\n    \"cluster_date\": \"2020-05-02\"//自主健康管理日期(yyyy-mm-dd) 如果cluster為2時必填\n}"
+				"description": "插入範例和命名\n{\n    \"name\": \"陳先生\",\n    \"cellphone\": \"0912345678\",\n    \"residence\": \"台中市\",//居住地\n    \"identity\": \"1\", //0:就診, 1:陪同, 2:其他\n    \"travel_histroy\": \"1\", //0:無, 1: 曾出國\n    \"travel_country\": \"香港\", //出國的國家名稱, history為1時必填\n    \"travel_destination\": \"\",//旅遊地, history為2時必填\n    \"occupation\": \"6\",//0:無, 1,2,3,4,5,6: 其他\n    \"occupation_other\":\"前端工程師\",//其他職業(可null, 6被勾選擇必填)\n    \"contact_history\":[4,6], //接觸史 array 0:無, 1,2,3,4(如果勾選，則contact_multi裡頭加入),5,6:其他\n    \"contact_multi\": \"1\", //0,1\n    \"contact_other\": \"公司\",//其他接觸史(可null, 6被勾選擇必填)\n    \"cluster\": [1,2],//群聚 0:無, 1(如果勾選，則cluster_multi裡頭加入),2,3,4\n    \"cluster_multi\": \"2\",//0,1,2\n    \"cluster_date\": \"2020-05-02\"//自主健康管理日期(yyyy-mm-dd) 如果cluster為2時必填\n}"
 			},
 			"response": []
 		},
@@ -81,6 +81,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
