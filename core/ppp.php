@@ -86,8 +86,6 @@ class ppp
                 $filter = new \Twig\TwigFilter('site_url', 'site_url');
                 $twig->addFilter($filter);
 
-                $twig->addGlobal('session', $_SESSION);
-
                 $template = $twig->load($file);
                 $template->display($this->assign ? $this->assign : array());
 		}
