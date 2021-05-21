@@ -117,5 +117,28 @@ class apiController extends \core\PPP {
 			return;
 		}
 		json(new resModel(400, '請確認id是否正確!'));
-	}
+    }
+    
+    //POST 統計登入api
+    public function login() {
+        $cusid = get('cusid') ? get('cusid') : null;
+        $post = post_json();
+        if('leyan' . $cusid == $post['account']) {
+            $_SESSION['user'] = $post['account'];
+            json(new resModel(200, '登入成功!'));
+            return;
+        }
+        json(new resModel(400, '請確認登入碼是否正確!'));
+    }
+    
+    //POST 後台登入api
+    public function clinic_login() {
+        $post = post_json();
+        if($post['account'] === 'leyan520') {
+            $_SESSION['user'] = true;
+            json(new resModel(200, '登入成功!'));
+            return;
+        }
+        json(new resModel(400, '請確認登入碼是否正確!'));
+    }    
 }
