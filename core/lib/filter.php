@@ -1,9 +1,7 @@
 <?php
 
 namespace core\lib;
-
 if ( ! defined('PPP')) exit('非法入口');
-
 class Filter
 {
     //sql xss 注入防護

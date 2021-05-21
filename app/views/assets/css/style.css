@@ -37,7 +37,7 @@ html, body{
     align-items: center;
     margin-bottom: 10px;
 }
-.input__group input[type="text"]{
+.input__group input[type="text"], .input__group select{
     border-radius: 0;
     border: solid 1px #a6a6a6;
     padding: 10px;
@@ -260,6 +260,9 @@ button, input[type="submit"], input[type="reset"] {
 input.invalid{
     border: solid 1px red !important;
 }
+select.invalid{
+    border: solid 1px red !important;
+}
 span.invalid::after{
     content: "必填";
     color: red !important;
@@ -271,11 +274,3 @@ label.invalid::after{
 #complete, #error{
     display: none;
 }
-
-/* debug */
-/* #form{
-    display: none;
-}
-#complete{
-    display: block;
-} */

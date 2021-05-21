@@ -1,6 +1,6 @@
 
 const identity = ["就診", "陪同", "其他"];
-const travel_histroy = ["無", "曾出國"];
+const travel_histroy = ["無", "曾出國", "曾至國內旅遊"];
 const occupation = ["無", "醫院工作者", "交通運輸業", "旅遊業", "旅館業", "航空服務業", "其他"];
 const contact_history = ["無", "曾至醫院、診所就醫", "曾接觸至國外旅遊且有發燒/呼吸道症狀之親友/家屬", "曾出入機場、觀光景點及其他頻繁接觸外國人場所", "曾參與公眾集會", "野生動物與禽鳥接觸", "其他"];
 const contact_multi = ["宗教/政治/學術/藝文活動", "開學/畢業典禮、婚喪喜慶、運動賽事等聚眾活動"];
@@ -12,7 +12,7 @@ function getList () {
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
     const m = `${year}-${padLeft(month)}`;
-    axios.get(`/api/list?cusid=${customer_data.cusid}&month=${m}`)
+    axios.get(`/tocc/api/list?cusid=${customer_data.cusid}&month=${m}`)
         .then(function (response) {
             renderList(response.data.data);
             console.log(response);
@@ -31,7 +31,8 @@ function renderList (data) {
                 <td>${item.name}</td>
                 <td>${item.cellphone}</td>
                 <td>${identity[item.identity]}</td>
-                <td>${travel_histroy[item.travel_histroy]}(${item.travel_country})</td>
+                <td>${item.residence}</td>
+                <td>${travel_histroy[item.travel_histroy]}(${item.travel_country || item.travel_destination})</td>
                 <td>${occupation[item.occupation]}(${item.occupation_other})</td>
                 <td>${getContactHistory(contact_history, item, JSON.parse(item.contact_history))}</td>
                 <td>${getCluster(cluster, item, JSON.parse(item.cluster))}</td>

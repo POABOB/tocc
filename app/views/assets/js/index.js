@@ -21,7 +21,7 @@ function inputValidate (id, value) {
     const input = $(`#${id}-${value}_input`).val();
     if(q){
         if(q.indexOf(value) !== -1) {
-            return input == '' ? 1 : 0;
+            return input == '' || input == null ? 1 : 0;
         } else {
             return 0;
         }
@@ -80,6 +80,10 @@ async function formValidate () {
             value: $('#identity').val() == null ? true : false,
             name: 'identity'
         },
+        residence: {
+            value: $('#residence').val() == null ? true : false,
+            name: 'residence'
+        },
         q1: {
             value: $('input[name="q1"]:checked').val() == undefined ? true : false,
             name: 'q1'
@@ -103,6 +107,13 @@ async function formValidate () {
         $('#q1-1_input').addClass('invalid');
     } else{
         $('#q1-1_input').removeClass('invalid');
+    }
+    const q1_2_input = await inputValidate('q1','2');
+    if(q1_2_input == 1) {
+        error.q1.value = true;
+        $('#q1-2_input').addClass('invalid');
+    } else{
+        $('#q1-2_input').removeClass('invalid');
     }
     const q2_6_input = await inputValidate('q2','6');
     if(q2_6_input == 1) {
@@ -164,8 +175,10 @@ async function send () {
         const name = $('#name').val();
         const cellphone = $('#cellphone').val();
         const identity = $('#identity').val();
+        const residence = $('#residence').val();
         const travel_histroy = $('input[name="q1"]:checked').val();
         const travel_country = $('#q1-1_input').val();
+        const travel_destination = $('#q1-2_input').val();
         const occupation = $('input[name="q2"]:checked').val();
         const occupation_other = $('#q2-6_input').val();
         const contact_history = $('input[name="q3"]:checked').map(function(){
@@ -182,6 +195,7 @@ async function send () {
             name,
             cellphone,
             identity,
+            residence,
             travel_histroy,
             occupation,
             contact_history,
@@ -191,6 +205,11 @@ async function send () {
             data.travel_country = travel_country;
         } else {
             data.travel_country = "";
+        }
+        if(travel_histroy == "2") { 
+            data.travel_destination = travel_destination;
+        } else {
+            data.travel_destination = "";
         }
         if(occupation == "6") {
             data.occupation_other = occupation_other;
@@ -219,7 +238,7 @@ async function send () {
             data.cluster_date = "";
         }
         
-        axios.post(`/api/add?cusid=${customer_data.cusid}`, data)
+        axios.post(`/tocc/api/add?cusid=${customer_data.cusid}`, data)
           .then(function (response) {
             console.log(response);
             $('#form').hide();
