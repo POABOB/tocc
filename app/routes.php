@@ -3,6 +3,10 @@ if ( ! defined('PPP')) exit('非法入口');
 use core\common\auth;
 //DOCS: https://github.com/bramus/router
 
+if(!isset($_SESSION['user'])) {
+    $_SESSION['user'] = false;
+}
+
 //統計登入 views&api
 $router->get('/login', 'viewsController@login');
 $router->post('/login', 'apiController@login');
