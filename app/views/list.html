@@ -63,11 +63,11 @@
                 .then(res => res.json())
                 .then(res => {
                     alert(res.message);
+                    location.reload();
                 });
             } else {
                 alert('登入碼錯誤，請重新再試...');
             }
-            location.reload();
         }
     } else {
         alert("請確認id是否正確!");
