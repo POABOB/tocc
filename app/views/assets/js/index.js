@@ -219,7 +219,7 @@ async function send () {
             data.cluster_date = "";
         }
         
-        axios.post(`/tocc/api/add?cusid=${customer_data.cusid}`, data)
+        axios.post(`/api/add?cusid=${customer_data.cusid}`, data)
           .then(function (response) {
             console.log(response);
             $('#form').hide();
