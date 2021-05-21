@@ -19,13 +19,6 @@ class viewsController extends \core\PPP {
 		$this->display('index.html');
     }
 
-    //GET 統計登入視圖
-    public function login() {
-        $data = $this->get_customer();
-        $this->assign('data', array('cusname' => $data['cusname'], 'cusid' => $data['cusid']));
-        $this->display('login.html');
-    }
-
     //GET 列表視圖
 	public function list() {
         $data = $this->get_customer();
