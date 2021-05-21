@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}">
 </head>
 
-<body>
+<body style="display: none;">
     <div class="container" style="padding-top: 20px;">
         <h1 class="mb-3">實聯制登記 - 表單列表 <span id="cusname"></span> </h1>
         <div class="flex f-row jcs aic mb-3">
@@ -52,6 +52,7 @@
         if(customer_data['session'] === 'leyan' + customer_data['cusid']) {
             getDate();
             getList();
+            $("body").css('display', 'block');
         } else {
             if(prompt('請輸入登入碼:', '') === 'leyan' + customer_data['cusid']) {
                 let data = {'account': 'leyan' + customer_data['cusid']};
