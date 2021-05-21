@@ -47,7 +47,6 @@
         'cusid': "{{ data['cusid']|raw }}",
         'session': "{{ session['user'] }}"
     }
-    console.log(customer_data);
     if(customer_data['cusname'] !== "") {
         document.getElementById('cusname').innerHTML = customer_data['cusname']
         if(customer_data['session'] === 'leyan' + customer_data['cusid']) {
@@ -63,13 +62,15 @@
                 })
                 .then(res => res.json())
                 .then(res => {
-                    alert(res.message)
-                    location.reload()
+                    alert(res.message);
                 });
+            } else {
+                alert('登入碼錯誤，請重新再試...');
             }
+            location.reload();
         }
     } else {
-        alert("請確認id是否正確!")
+        alert("請確認id是否正確!");
     }
     
 </script>

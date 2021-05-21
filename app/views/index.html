@@ -242,7 +242,6 @@
         'cusname': "{{ data['cusname']|raw }}",
         'cusid': "{{ data['cusid']|raw }}"
     }
-    console.log(customer_data);
     if(customer_data['cusname'] !== "") {
         document.getElementById('cusname').innerHTML = customer_data['cusname']
         document.getElementById('cusname2').innerHTML = customer_data['cusname']
