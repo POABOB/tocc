@@ -12,7 +12,7 @@ function getList () {
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
     const m = `${year}-${padLeft(month)}`;
-    axios.get(`/tocc/api/list?cusid=${customer_data.cusid}&month=${m}`)
+    axios.get(`/api/list?cusid=${customer_data.cusid}&month=${m}`)
         .then(function (response) {
             renderList(response.data.data);
             console.log(response);
