@@ -9,10 +9,7 @@ if(!isset($_SESSION['user'])) {
 
 //統計登入 api
 $router->post('/login', 'apiController@login');
-$router->before('GET', '/login', function() {
-    $cusid = get('cusid') ? get('cusid') : null;
-    redirect('/list?cusid=' . $cusid);
-});
+
 //views
 $router->get('/', 'viewsController@index');
 $router->get('/customer', 'viewsController@customer');
@@ -37,3 +34,7 @@ $router->before('GET', '/clinic/list', function() {
 $router->mount('/clinic', function() use ($router) {
     $router->get('/list', 'viewsController@clinic_list');
 });
+
+$router->post('/api/clinic/add', 'apiController@clinic_add');
+$router->post('/api/clinic/update', 'apiController@clinic_update');
+$router->post('/api/clinic/delete', 'apiController@clinic_delete');

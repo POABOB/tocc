@@ -23,9 +23,93 @@
             padding: 1rem 3rem;
         }
     }
+    .modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9;
+    }
+    .modal__backdrop {
+        background-color: rgba(0, 0, 0, 0.3);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .modal__dialog {
+        background-color: #fff;
+        position: relative;
+        width: 600px;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        z-index: 2;
+    }
+    @media screen and (max-width: 992px) {
+        .modal__dialog {
+            width: 90%;
+        }
+    }
+    .modal__close {
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        border: 0;
+    }
+    .modal__header {
+        padding: 20px 20px 10px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .modal__body {
+        padding: 10px 20px 10px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .modal__footer {
+        padding: 10px 20px 20px;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.2s;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+    label {
+        display: inline-block;
+        width: 7%;
+    }
+    input {
+        width: 90%;
+    }
+    .btn {
+        padding: .3rem .6rem;
+        border-radius: 5px;
+        background-color: transparent;
+        cursor: pointer;
+        margin: .2rem;
+    }
+
+    .btn:hover {
+        background-color: rgb(240, 240, 240);
+    }
+ 
 </style>
 <body>
     <div class="rwd">
+        <!-- <input style="width: 250px;" type="text" id="key" onchange="searching();"> -->
+        <button class="btn" onclick="addModal(true);">新增診所</button>
         <table>
             <thead>
                 <tr>
@@ -33,6 +117,7 @@
                     <th>名稱</th>
                     <th>前台</th>
                     <th>統計</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,12 +127,198 @@
                     <td>{{ d.cusname }}</td>
                     <td><a href="{{ '/customer'|base_url }}?cusid={{d.cusid }}" target="__blank">{{ '/customer'|base_url }}?cusid={{d.cusid }}</a></td>
                     <td><a href="{{ '/list'|base_url }}?cusid={{d.cusid }}" target="__blank">{{ '/list'|base_url }}?cusid={{d.cusid }}</a></td>
+                    <td>
+                        <button class="btn" onclick="updateModal(true, '{{d.cusid }}', '{{d.cusname }}', '{{d.custel }}', '{{d.cusaddr }}');">編輯</button>
+                        <button class="btn" onclick="deleteSubmit('{{d.cusid }}');">刪除</button>
+                    </td>
                 </tr>
                 {% endfor%}
             </tbody>
         </table>
+
+        <!-- modal start -->
+        <div class="modal" style="display: none;" id="addModal">
+            <div class="modal__backdrop" onclick="addModal(false);"></div>
+            <div class="modal__dialog">
+                <div class="modal__header">
+                    新增診所
+                    <button type="button" class="modal__close" onclick="addModal(false);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+                            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+                        </svg>
+                    </button>
+                </div>
+      
+                <div class="modal__body">
+                    <form name='form' onsubmit='return addSubmit();'>
+                        <div>
+                            <label for="cusid">ID</label>
+                            <input id="cusid" maxlength="15" name="cusid" type="text" required>
+                        </div>
+                        <div>
+                            <label for="cusname">名稱</label>
+                            <input id="cusname"  maxlength="64" name="cusname" type="text" required>
+                        </div>
+                       <div>
+                            <label for="custel">電話</label>
+                            <input id="custel"  maxlength="15" name="custel" type="text">
+                       </div>
+                        <div>
+                            <label for="cusaddr">地址</label>
+                            <input id="cusaddr"  maxlength="256" name="cusaddr" type="text">
+                        </div>
+                        
+                        <button  class="btn" type="submit">提交</button>
+                    </form>
+                </div>
+                <!-- <div class="modal__footer">
+                    1
+                </div> -->
+            </div>
+        </div>
+
+        <div class="modal" style="display: none;" id="updateModal">
+            <div class="modal__backdrop" onclick="updateModal(false);"></div>
+            <div class="modal__dialog">
+                <div class="modal__header">
+                    編輯診所
+                    <button type="button" class="modal__close" onclick="updateModal(false);">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+                            <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+                        </svg>
+                    </button>
+                </div>
+      
+                <div class="modal__body">
+                    <form name='form2' onsubmit='return updateSubmit();'>
+                        <div style="display: none;">
+                            <label for="update_cusid">ID</label>
+                            <input id="update_cusid"  maxlength="15" name="update_cusid" type="text" required>
+                        </div>
+                        <div>
+                            <label for="update_cusname">名稱</label>
+                            <input id="update_cusname"  maxlength="64" name="update_cusname" type="text" required>
+                        </div>
+                       <div>
+                            <label for="update_custel">電話</label>
+                            <input id="update_custel"  maxlength="15" name="update_custel" type="text">
+                       </div>
+                        <div>
+                            <label for="update_cusaddr">地址</label>
+                            <input id="update_cusaddr"  maxlength="256" name="update_cusaddr" type="text">
+                        </div>
+                        
+                        <button  class="btn" type="submit">更新</button>
+                    </form>
+                </div>
+                <!-- <div class="modal__footer">
+                    1
+                </div> -->
+            </div>
+        </div>
+        <!-- modal end -->
     </div>
     <!-- site_url 為返回assets資料夾路徑 -->
     <!-- <script src="{{ '/js/index.js'|site_url }}"></script> -->
+    <script>
+        function addModal(modalShow) {
+            if(modalShow === true) {
+                document.getElementById('addModal').style.display = 'block';
+                document.querySelector("body").classList.add("overflow-hidden");
+            } else {
+                document.getElementById('addModal').style.display = 'none';
+                document.querySelector("body").classList.remove("overflow-hidden");
+            }
+        }
+
+        function updateModal(modalShow, cusid = '', cusname = '', custel = '', cusaddr = '') {
+            if(modalShow === true) {
+                document.forms["form2"]["update_cusid"].value = cusid;
+                document.forms["form2"]["update_cusname"].value = cusname;
+                document.forms["form2"]["update_custel"].value = custel;
+                document.forms["form2"]["update_cusaddr"].value = cusaddr;
+                document.getElementById('updateModal').style.display = 'block';
+                document.querySelector("body").classList.add("overflow-hidden");
+            } else {
+                document.getElementById('updateModal').style.display = 'none';
+                document.querySelector("body").classList.remove("overflow-hidden");
+            }
+        }
+        
+        // function searching() {
+
+        // }
+
+        function addSubmit() {
+            event.preventDefault();
+            let data = {
+                cusid: document.forms["form"]["cusid"].value,
+                cusname: document.forms["form"]["cusname"].value,
+                custel: document.forms["form"]["custel"].value,
+                cusaddr: document.forms["form"]["cusaddr"].value
+            };
+            fetch("{{ '/api/clinic/add'|base_url }}", {
+                method: "POST", 
+                body: JSON.stringify(data),
+                headers: new Headers({'content-type': 'application/json'}),
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.code === 200) {
+                    alert(res.message);
+                    location.reload();
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+
+        function updateSubmit() {
+            event.preventDefault();
+            let data = {
+                cusid: document.forms["form2"]["update_cusid"].value,
+                cusname: document.forms["form2"]["update_cusname"].value,
+                custel: document.forms["form2"]["update_custel"].value,
+                cusaddr: document.forms["form2"]["update_cusaddr"].value
+            };
+            fetch("{{ '/api/clinic/update'|base_url }}", {
+                method: "POST", 
+                body: JSON.stringify(data),
+                headers: new Headers({'content-type': 'application/json'}),
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.code === 200) {
+                    alert(res.message);
+                    location.reload();
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+
+        function deleteSubmit(cusid) {
+            event.preventDefault();
+            let data = {
+                cusid: cusid
+            };
+            if(confirm('刪除診所後資料將無法復原，是否刪除該診所?')) {
+                fetch("{{ '/api/clinic/delete'|base_url }}", {
+                    method: "POST", 
+                    body: JSON.stringify(data),
+                    headers: new Headers({'content-type': 'application/json'}),
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if(res.code === 200) {
+                        alert(res.message);
+                        location.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>

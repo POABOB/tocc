@@ -13,21 +13,26 @@ class apiController extends \core\PPP {
 	public function list() {
         //獲取$_GET['cusid'] $_GET['month']
         $cusid = get('cusid') ? get('cusid') : null;
-        $Sdate = get('month') ? get('month').'-01' : date(date('Y-m').'-01', strtotime(date("Y-m-d")));
-        $Edate = get('month') ? date(get('month') .'-t', strtotime(get('month'))) : date(date('Y-m').'-t', strtotime('now'));
-        $Edate = $Edate." 23:59:59";
-        $database = new apiModel();
-        $data = $database->find(
-            '*', 
-            array(
-                'cusid' => $cusid,
-                'created_at[>=]' => $Sdate,
-                'created_at[<=]' => $Edate
-            )
-        );
-
-        json(new resModel(200, $data));
-		return;
+        $Sdate = get('month') ? get('month') : date("Y-m-d");
+        $Edate = $Sdate." 23:59:59";
+        if(strtotime ($Sdate) <= strtotime(date('Y-m-d')) || strtotime ($Sdate) >= strtotime ('-60 days', strtotime(date('Y-m-d')))) {
+            $database = new apiModel();
+            $data = $database->find(
+                '*', 
+                array(
+                    'cusid' => $cusid,
+                    'created_at[>=]' => $Sdate,
+                    'created_at[<=]' => $Edate,
+                    'ORDER' => array('created_at' => 'DESC')
+                )
+            );
+    
+            json(new resModel(200, $data));
+            return;
+        } else {
+            json(new resModel(401, '日期超出60天範圍'));
+			return;
+        }
     }
     
     //POST 新增表單內容
@@ -140,5 +145,59 @@ class apiController extends \core\PPP {
             return;
         }
         json(new resModel(400, '請確認登入碼是否正確!'));
-    }    
+    }
+
+    //POST 新增診所api
+    public function clinic_add() {
+        $post = post_json();
+        $database = new apiModel();
+        $return = $database->clinic_add(
+            array(
+                "cusname" => $post["cusname"],
+                "custel" => $post["custel"],
+                "cusaddr" => $post["cusaddr"],
+                "cusid" => $post["cusid"],
+            )
+        );
+        if($return) {
+            json(new resModel(200, '新增診所成功!'));
+            return;
+        }
+        json(new resModel(400, '請勿重複新增相同ID!'));
+    }
+
+    //POST 更新診所api
+    public function clinic_update() {
+        $post = post_json();
+        $database = new apiModel();
+        $return = $database->clinic_update(
+            array(
+                "cusname" => $post["cusname"],
+                "custel" => $post["custel"],
+                "cusaddr" => $post["cusaddr"]
+            ),
+            array("cusid" => $post["cusid"])
+        );
+        if($return) {
+            json(new resModel(200, '更新診所成功!'));
+            return;
+        }
+        json(new resModel(400, '更新診所失敗!'));
+    }
+    //POST 刪除診所api
+    public function clinic_delete() {
+        $post = post_json();
+        $database = new apiModel();
+        $database->form_delete(
+            array("cusid" => $post["cusid"])
+        );
+        $return = $database->clinic_delete(
+            array("cusid" => $post["cusid"])
+        );
+        if($return) {
+            json(new resModel(200, '刪除診所成功!'));
+            return;
+        }
+        json(new resModel(400, '刪除診所失敗!'));
+    }
 }

@@ -11,7 +11,7 @@ function getList () {
     var date = new Date($('#date').val());
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
-    const m = `${year}-${padLeft(month)}`;
+    const m = $('#date').val();
     axios.get(`/api/list?cusid=${customer_data.cusid}&month=${m}`)
         .then(function (response) {
             renderList(response.data.data);

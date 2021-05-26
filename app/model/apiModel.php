@@ -15,4 +15,23 @@ class apiModel extends model {
             return false;
         }
     }
+
+    public function clinic_add($para = array(), $table = 'customer') {
+        if(!$this->has($table,$para)) {
+            return $this->insert($table,$para);
+        } else {
+            return false;
+        }
+    }
+
+    public function clinic_update($para = array(), $where = array(), $table = 'customer') {
+        return $this->update($table,$para,$where);
+    }
+
+    public function clinic_delete($where = array(), $table = 'customer') {
+        return $this->delete($table,$where);
+    }
+    public function form_delete($where = array(), $table = 'form') {
+        return $this->delete($table,$where);
+    }
 }
