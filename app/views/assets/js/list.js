@@ -8,9 +8,10 @@ const cluster = ["無", "同住家人正在", "家人也有發燒或呼吸道症
 const cluster_multi = ["居家隔離", "居家檢疫", "自主健康管理"];
 
 function getList () {
-    var date = new Date($('#date').val());
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear();
+    // var date = new Date($('#date').val());
+    // var month = date.getMonth() + 1;
+    // var year = date.getFullYear();
+    // const m = `${year}-${padLeft(month)}`;
     const m = $('#date').val();
     axios.get(`/api/list?cusid=${customer_data.cusid}&month=${m}`)
         .then(function (response) {

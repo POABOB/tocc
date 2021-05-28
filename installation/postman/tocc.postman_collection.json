@@ -58,7 +58,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/api/list?cusid=3701013348&month=2021-05",
+					"raw": "{{host}}/api/list?cusid=3701013348&month=2021-05-20",
 					"host": [
 						"{{host}}"
 					],
@@ -73,7 +73,7 @@
 						},
 						{
 							"key": "month",
-							"value": "2021-05"
+							"value": "2021-05-20"
 						}
 					]
 				},

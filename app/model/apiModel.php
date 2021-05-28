@@ -17,7 +17,7 @@ class apiModel extends model {
     }
 
     public function clinic_add($para = array(), $table = 'customer') {
-        if(!$this->has($table,$para)) {
+        if(!$this->has($table,array('cusid' => $para['cusid']))) {
             return $this->insert($table,$para);
         } else {
             return false;
