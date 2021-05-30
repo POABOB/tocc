@@ -9,7 +9,10 @@ if(!isset($_SESSION['user'])) {
 
 //統計登入 api
 $router->post('/login', 'apiController@login');
-
+$router->get('/login', function() {
+    $cusid = get('cusid') ? get('cusid') : null;
+    redirect('/list?cusid=' . $cusid);
+});
 //views
 $router->get('/', 'viewsController@index');
 $router->get('/customer', 'viewsController@customer');
