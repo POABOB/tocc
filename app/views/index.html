@@ -1,313 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>實聯制登記 - 表單填寫</title>
     <!-- site_url 為返回assets資料夾路徑 -->
-    <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}">
-</head>
-<body>
+    <link rel="stylesheet" href="{{ '/css/style.css'|site_url }}" />
+  </head>
+  <body>
     <div class="flex jcc aic">
-        <div class="flex f-col jcc aic form" id="form">
-            <div class="header flex f-col">
-                <div class="flex f-row jcc aic">
-                    <div class="header__qrcode" id="header__qrcode"></div>
-                </div>
-                <div class="header__title">實聯制登記-<span id="cusname"></span></div>
-                <!-- <div class="header__desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi nobis optio mollitia ipsum error rem beatae blanditiis provident. Dignissimos, facere fuga. Vero odit aspernatur deserunt, et mollitia provident libero aut!</div> -->
-                <span class="header__date"></span>
-            </div>
-            <div class="body w-100">
-                <div class="flex f-col jcs ais mb-3">
-                    <span class="body__hint"><span class="warning mr-1">*</span>必填</span>
-                    <div class="block__title mb-2">基本資料</div>
-                    <div class="flex f-col jcs ais mb-3 w-100">
-                        <span class="body__label">1.姓名<span class="warning ml-1">*</span></span>
-                        <div class="body__hint">請填寫真實姓名</div>
-                        <input id="name" type="text" class="body__input" placeholder="輸入您的答案">
-                    </div>
-                    <div class="flex f-col jcs ais mb-3  w-100">
-                        <span class="body__label">2.手機號碼<span class="warning ml-1">*</span></span>
-                        <div class="body__hint">請直接輸入手機號碼，Ex：0912345678</div>
-                        <input id="cellphone" type="number" class="body__input" placeholder="必須是數字">
-                    </div>
-                    <div class="flex f-col jcs ais mb-3  w-100">
-                        <span class="body__label">3.身份<span class="warning ml-1">*</span></span>
-                        <div class="body__hint">請選擇身份</div>
-                        <select class="body__input" name="" id="identity">
-                            <option value="-1" disabled selected>請選擇身份</option>
-                            <option value="0">就診者</option>
-                            <option value="1">陪同者</option>
-                            <option value="2">其他</option>
-                        </select>
-                    </div>
-                    <div class="flex f-col jcs ais mb-3  w-100">
-                        <span class="body__label">4.居住地<span class="warning ml-1">*</span></span>
-                        <div class="body__hint">請選擇居住地</div>
-                        <select class="body__input" name="" id="residence">
-                            <option value="-1" disabled selected>請選擇居住地</option>
-                            <option value="臺北市">臺北市</option>
-                            <option value="新北市">新北市</option>
-                            <option value="桃園市">桃園市</option>
-                            <option value="臺中市">臺中市</option>
-                            <option value="臺南市">臺南市</option>
-                            <option value="高雄市">高雄市</option>
-                            <option value="新竹縣">新竹縣</option>
-                            <option value="苗栗縣">苗栗縣</option>
-                            <option value="彰化縣">彰化縣</option>
-                            <option value="南投縣">南投縣</option>
-                            <option value="雲林縣">雲林縣</option>
-                            <option value="嘉義縣">嘉義縣</option>
-                            <option value="屏東縣">屏東縣</option>
-                            <option value="宜蘭縣">宜蘭縣</option>
-                            <option value="花蓮縣">花蓮縣</option>
-                            <option value="臺東縣">臺東縣</option>
-                            <option value="澎湖縣">澎湖縣</option>
-                            <option value="金門縣">金門縣</option>
-                            <option value="連江縣">連江縣</option>
-                            <option value="基隆市">基隆市</option>
-                            <option value="新竹市">新竹市</option>
-                            <option value="嘉義市">嘉義市</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="flex f-col jcs ais mb-3">
-                    <div class="block__title mb-2">TOCC評估表</div>
-                    <div class="flex f-col jcs ais mb-3 w-100">
-                        <span class="body__label">1.最近14日內旅遊史？<span id="q1" class="warning ml-1">*</span></span>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q1-1" name="q1" value="1">
-                            <label class="input__label" for="q1-1">自身曾至國外旅遊( 前往的國家:<input id="q1-1_input" type="text"> )</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q1-2" name="q1" value="2">
-                            <label class="input__label" for="q1-2">自身曾至國內旅遊( 前往的縣市:
-                                <select id="q1-2_input" name="" id="residence">
-                                    <option value="-1" disabled selected>請選擇縣市</option>
-                                    <option value="臺北市">臺北市</option>
-                                    <option value="新北市">新北市</option>
-                                    <option value="桃園市">桃園市</option>
-                                    <option value="臺中市">臺中市</option>
-                                    <option value="臺南市">臺南市</option>
-                                    <option value="高雄市">高雄市</option>
-                                    <option value="新竹縣">新竹縣</option>
-                                    <option value="苗栗縣">苗栗縣</option>
-                                    <option value="彰化縣">彰化縣</option>
-                                    <option value="南投縣">南投縣</option>
-                                    <option value="雲林縣">雲林縣</option>
-                                    <option value="嘉義縣">嘉義縣</option>
-                                    <option value="屏東縣">屏東縣</option>
-                                    <option value="宜蘭縣">宜蘭縣</option>
-                                    <option value="花蓮縣">花蓮縣</option>
-                                    <option value="臺東縣">臺東縣</option>
-                                    <option value="澎湖縣">澎湖縣</option>
-                                    <option value="金門縣">金門縣</option>
-                                    <option value="連江縣">連江縣</option>
-                                    <option value="基隆市">基隆市</option>
-                                    <option value="新竹市">新竹市</option>
-                                    <option value="嘉義市">嘉義市</option>
-                                </select>
-                            )</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q1-3" name="q1" value="0">
-                            <label class="input__label bold" for="q1-3">無</label>
-                        </div>
-                    </div>
-                    <div class="flex f-col jcs ais mb-3 w-100">
-                        <span class="body__label">2.你的職業別為何？<span id="q2" class="warning ml-1">*</span></span>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-1" name="q2" value="1">
-                            <label class="input__label" for="q2-1">醫院工作者(如醫事/非醫事人員，含外包人力、實習學生及衛生保健志工等)</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-2" name="q2" value="2">
-                            <label class="input__label" for="q2-2">交通運輸業(如計程車、客運司機等)</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-3" name="q2" value="3">
-                            <label class="input__label" for="q2-3">旅遊業(如導遊)</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-4" name="q2" value="4">
-                            <label class="input__label" for="q2-4">旅館業(如房務、客務接待人員)</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-5" name="q2" value="5">
-                            <label class="input__label" for="q2-5">航空服務業(如航空機組人員)</label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-6" name="q2" value="6">
-                            <label class="input__label" for="q2-6">其他：<input id="q2-6_input" type="text"></label>
-                        </div>
-                        <div class="input__group">
-                            <input class="input__check" type="radio" id="q2-7" name="q2" value="0">
-                            <label class="input__label bold" for="q2-7">無</label>
-                        </div>
-                    </div>
-                    <div class="flex f-col jcs ais mb-3 w-100">
-                        <span class="body__label">3.您近期接觸及出入場所？<span id="q3" class="warning ml-1">*</span></span>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-1" name="q3" value="1">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q3-1">曾至醫院、診所就醫</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-2" name="q3" value="2">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q3-2">曾接觸至國外旅遊且有發燒/呼吸道症狀之親友/家屬</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-3" name="q3" value="3">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q3-3">曾出入機場、觀光景點及其他頻繁接觸外國人場所</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="flex f-col">
-                                <div class="flex f-row">
-                                    <div class="input__check">
-                                        <input type="checkbox" id="q3-4" name="q3" value="4">
-                                        <div class="input__check-custom"></div>
-                                    </div>
-                                    <label class="input__label" for="q3-4" id="q3-4_label">曾參與公眾集會</label>
-                                </div>
-                                <div class="flex f-col input__group-indent">
-                                    <div class="input__group">
-                                        <input class="input__check" type="radio" name="q3-4" id="q3-4-1" value="0">
-                                        <label class="input__label" for="q3-4-1">宗教/政治/學術/藝文活動</label>
-                                    </div>
-                                    <div class="input__group">
-                                        <input class="input__check" type="radio" name="q3-4" id="q3-4-2" value="1">
-                                        <label class="input__label" for="q3-4-2">開學/畢業典禮、婚喪喜慶、運動賽事等聚眾活動</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-5" name="q3" value="5">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q3-5">野生動物與禽鳥接觸</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-6" name="q3" value="6">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q3-6">其他：<input id="q3-6_input" type="text"></label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q3-7" name="q3" value="0">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label bold" for="q3-7">無</label>
-                        </div>
-                    </div>
-                    <div class="flex f-col jcs ais mb-3 w-100">
-                        <span class="body__label">4.您近一個月內群聚史？<span id="q4" class="warning ml-1">*</span></span>
-                        <div class="input__group">
-                            <div class="flex f-col">
-                                <div class="flex f-row">
-                                    <div class="input__check">
-                                        <input type="checkbox" id="q4-1" name="q4" value="1">
-                                        <div class="input__check-custom"></div>
-                                    </div>
-                                    <label class="input__label" for="q4-1" id="q4-1_label">同住家人正在</label>
-                                </div>
-                                <div class="flex f-col input__group-indent">
-                                    <div class="input__group">
-                                        <input class="input__check" type="radio" name="q4-1" id="q4-1-0" value="0">
-                                        <label class="input__label" for="q4-1-0">居家隔離</label>
-                                    </div>
-                                    <div class="input__group">
-                                        <input class="input__check" type="radio" name="q4-1" id="q4-1-1" value="1">
-                                        <label class="input__label" for="q4-1-1">居家檢疫</label>
-                                    </div>
-                                    <div class="input__group">
-                                        <input class="input__check" type="radio" name="q4-1" id="q4-1-2" value="2">
-                                        <label class="input__label" for="q4-1-2">自主健康管理( 到期日：<input id="q4-1-2_month" type="number">月/<input id="q4-1-2_date" type="number">日 )</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q4-2" name="q4" value="2">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q4-2">家人也有發燒或呼吸道症狀</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q4-3" name="q4" value="3">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q4-3">朋友也有發燒或呼吸道症狀</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q4-4" name="q4" value="4">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label" for="q4-4">同事也有發燒或呼吸道症狀</label>
-                        </div>
-                        <div class="input__group">
-                            <div class="input__check">
-                                <input type="checkbox" id="q4-5" name="q4" value="0">
-                                <div class="input__check-custom"></div>
-                            </div>
-                            <label class="input__label bold" for="q4-5">無</label>
-                        </div>
-                    </div>
-                    <div class="btn w-100" onclick="send()">提交</div>
-                </div>
-            </div>
+      <div class="flex f-col jcc aic form" id="form">
+        <div class="header flex f-col">
+          <div class="flex f-row jcc aic">
+            <div class="header__qrcode" id="header__qrcode"></div>
+          </div>
+          <div class="header__title">實聯制登記-<span id="cusname"></span></div>
+          <!-- <div class="header__desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi nobis optio mollitia ipsum error rem beatae blanditiis provident. Dignissimos, facere fuga. Vero odit aspernatur deserunt, et mollitia provident libero aut!</div> -->
+          <span class="header__date"></span>
         </div>
-        <div class="flex f-col jcc aic form" id="complete">
-            <div class="header flex f-col">
-                <div class="flex f-row jcc aic">
-                    <img class="header__qrcode" src="{{ 'img/thank.jpg'|site_url }}" alt="">
-                    <!-- <div class="header__qrcode" id="header__qrcode"></div> -->
+        <div class="body w-100">
+          <div class="flex f-col jcs ais mb-3">
+            <span class="body__hint"
+              ><span class="warning mr-1">*</span>必填</span
+            >
+            <div class="block__title mb-2">基本資料</div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >1.姓名<span class="warning ml-1">*</span></span
+              >
+              <div class="body__hint">請填寫真實姓名</div>
+              <input
+                id="name"
+                type="text"
+                class="body__input"
+                placeholder="輸入您的答案"
+              />
+            </div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >2.手機號碼<span class="warning ml-1">*</span></span
+              >
+              <div class="body__hint">請直接輸入手機號碼，Ex：0912345678</div>
+              <input
+                id="cellphone"
+                type="number"
+                class="body__input"
+                placeholder="必須是數字"
+              />
+            </div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >3.身份<span class="warning ml-1">*</span></span
+              >
+              <div class="body__hint">請選擇身份</div>
+              <select class="body__input mb-1" name="" id="identity">
+                <option value="-1" disabled selected>請選擇身份</option>
+                <option value="0">就診者</option>
+                <option value="1">陪同者</option>
+                <option value="2">其他</option>
+              </select>
+              <input
+                id="identity_other"
+                type="text"
+                class="body__input"
+                placeholder="輸入備註"
+              />
+            </div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >4.居住地<span class="warning ml-1">*</span></span
+              >
+              <div class="body__hint">請選擇居住地</div>
+              <select class="body__input" name="" id="residence">
+                <option value="-1" disabled selected>請選擇居住地</option>
+                <option value="臺北市">臺北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="臺中市">臺中市</option>
+                <option value="臺南市">臺南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="臺東縣">臺東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+                <option value="基隆市">基隆市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="嘉義市">嘉義市</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex f-col jcs ais mb-3">
+            <div class="block__title mb-2">TOCC評估表</div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >1.最近14日內旅遊史？<span id="q1" class="warning ml-1"
+                  >*</span
+                ></span
+              >
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q1-1"
+                  name="q1"
+                  value="1"
+                />
+                <label class="input__label" for="q1-1"
+                  >自身曾至國外旅遊( 前往的國家:<input
+                    id="q1-1_input"
+                    type="text"
+                  />
+                  )</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q1-2"
+                  name="q1"
+                  value="2"
+                />
+                <label class="input__label" for="q1-2"
+                  >自身曾至國內旅遊( 前往的縣市:
+                  <select id="q1-2_input" name="" id="residence">
+                    <option value="-1" disabled selected>請選擇縣市</option>
+                    <option value="臺北市">臺北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="桃園市">桃園市</option>
+                    <option value="臺中市">臺中市</option>
+                    <option value="臺南市">臺南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="臺東縣">臺東縣</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="連江縣">連江縣</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="嘉義市">嘉義市</option>
+                  </select>
+                  )</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q1-3"
+                  name="q1"
+                  value="3"
+                />
+                <label class="input__label" for="q1-3">屏東枋山</label>
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q1-4"
+                  name="q1"
+                  value="0"
+                />
+                <label class="input__label bold" for="q1-4">無</label>
+              </div>
+            </div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >2.你的職業別為何？<span id="q2" class="warning ml-1"
+                  >*</span
+                ></span
+              >
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-1"
+                  name="q2"
+                  value="1"
+                />
+                <label class="input__label" for="q2-1"
+                  >醫院工作者(如醫事/非醫事人員，含外包人力、實習學生及衛生保健志工等)</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-2"
+                  name="q2"
+                  value="2"
+                />
+                <label class="input__label" for="q2-2"
+                  >交通運輸業(如計程車、客運司機等)</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-3"
+                  name="q2"
+                  value="3"
+                />
+                <label class="input__label" for="q2-3">旅遊業(如導遊)</label>
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-4"
+                  name="q2"
+                  value="4"
+                />
+                <label class="input__label" for="q2-4"
+                  >旅館業(如房務、客務接待人員)</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-5"
+                  name="q2"
+                  value="5"
+                />
+                <label class="input__label" for="q2-5"
+                  >航空服務業(如航空機組人員)</label
+                >
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-6"
+                  name="q2"
+                  value="6"
+                />
+                <label class="input__label" for="q2-6"
+                  >其他：<input id="q2-6_input" type="text"
+                /></label>
+              </div>
+              <div class="input__group">
+                <input
+                  class="input__check"
+                  type="radio"
+                  id="q2-7"
+                  name="q2"
+                  value="0"
+                />
+                <label class="input__label bold" for="q2-7">無</label>
+              </div>
+            </div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >3.您近期接觸及出入場所？<span id="q3" class="warning ml-1"
+                  >*</span
+                ></span
+              >
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-1" name="q3" value="1" />
+                  <div class="input__check-custom"></div>
                 </div>
-                <div class="header__title">實聯制登記-<span id="cusname2"></span></div>
-                <div class="header__desc">已完成登錄，謝謝！</div>
+                <label class="input__label" for="q3-1"
+                  >曾至醫院、診所就醫</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-2" name="q3" value="2" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q3-2"
+                  >曾接觸至國外旅遊且有發燒/呼吸道症狀之親友/家屬</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-3" name="q3" value="3" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q3-3"
+                  >曾出入機場、觀光景點及其他頻繁接觸外國人場所</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="flex f-col">
+                  <div class="flex f-row">
+                    <div class="input__check">
+                      <input type="checkbox" id="q3-4" name="q3" value="4" />
+                      <div class="input__check-custom"></div>
+                    </div>
+                    <label class="input__label" for="q3-4" id="q3-4_label"
+                      >曾參與公眾集會</label
+                    >
+                  </div>
+                  <div class="flex f-col input__group-indent">
+                    <div class="input__group">
+                      <input
+                        class="input__check"
+                        type="radio"
+                        name="q3-4"
+                        id="q3-4-1"
+                        value="0"
+                      />
+                      <label class="input__label" for="q3-4-1"
+                        >宗教/政治/學術/藝文活動</label
+                      >
+                    </div>
+                    <div class="input__group">
+                      <input
+                        class="input__check"
+                        type="radio"
+                        name="q3-4"
+                        id="q3-4-2"
+                        value="1"
+                      />
+                      <label class="input__label" for="q3-4-2"
+                        >開學/畢業典禮、婚喪喜慶、運動賽事等聚眾活動</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-5" name="q3" value="5" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q3-5"
+                  >野生動物與禽鳥接觸</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-6" name="q3" value="6" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q3-6"
+                  >其他：<input id="q3-6_input" type="text"
+                /></label>
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q3-7" name="q3" value="0" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label bold" for="q3-7">無</label>
+              </div>
             </div>
-        </div>
-        <div class="flex f-col jcc aic form" id="error">
-            <div class="header flex f-col">
-                <div class="header__title">實聯制登記-<span id="cusname2"></span></div>
-                <div class="header__desc">請確認id是否正確，謝謝！</div>
+            <div class="flex f-col jcs ais mb-3 w-100">
+              <span class="body__label"
+                >4.您近一個月內群聚史？<span id="q4" class="warning ml-1"
+                  >*</span
+                ></span
+              >
+              <div class="input__group">
+                <div class="flex f-col">
+                  <div class="flex f-row">
+                    <div class="input__check">
+                      <input type="checkbox" id="q4-1" name="q4" value="1" />
+                      <div class="input__check-custom"></div>
+                    </div>
+                    <label class="input__label" for="q4-1" id="q4-1_label"
+                      >同住家人正在</label
+                    >
+                  </div>
+                  <div class="flex f-col input__group-indent">
+                    <div class="input__group">
+                      <input
+                        class="input__check"
+                        type="radio"
+                        name="q4-1"
+                        id="q4-1-0"
+                        value="0"
+                      />
+                      <label class="input__label" for="q4-1-0">居家隔離</label>
+                    </div>
+                    <div class="input__group">
+                      <input
+                        class="input__check"
+                        type="radio"
+                        name="q4-1"
+                        id="q4-1-1"
+                        value="1"
+                      />
+                      <label class="input__label" for="q4-1-1">居家檢疫</label>
+                    </div>
+                    <div class="input__group">
+                      <input
+                        class="input__check"
+                        type="radio"
+                        name="q4-1"
+                        id="q4-1-2"
+                        value="2"
+                      />
+                      <label class="input__label" for="q4-1-2"
+                        >自主健康管理( 到期日：<input
+                          id="q4-1-2_month"
+                          type="number"
+                        />月/<input id="q4-1-2_date" type="number" />日 )</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q4-2" name="q4" value="2" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q4-2"
+                  >家人也有發燒或呼吸道症狀</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q4-3" name="q4" value="3" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q4-3"
+                  >朋友也有發燒或呼吸道症狀</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q4-4" name="q4" value="4" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label" for="q4-4"
+                  >同事也有發燒或呼吸道症狀</label
+                >
+              </div>
+              <div class="input__group">
+                <div class="input__check">
+                  <input type="checkbox" id="q4-5" name="q4" value="0" />
+                  <div class="input__check-custom"></div>
+                </div>
+                <label class="input__label bold" for="q4-5">無</label>
+              </div>
             </div>
+            <div class="btn w-100" onclick="send()">提交</div>
+          </div>
         </div>
+      </div>
+      <div class="flex f-col jcc aic form" id="complete">
+        <div class="header flex f-col">
+          <div class="flex f-row jcc aic">
+            <img
+              class="header__qrcode"
+              src="{{ 'img/thank.jpg'|site_url }}"
+              alt=""
+            />
+            <!-- <div class="header__qrcode" id="header__qrcode"></div> -->
+          </div>
+          <div class="header__title">
+            實聯制登記-<span id="cusname2"></span>
+          </div>
+          <div class="header__desc">已完成登錄，謝謝！</div>
+        </div>
+      </div>
+      <div class="flex f-col jcc aic form" id="error">
+        <div class="header flex f-col">
+          <div class="header__title">
+            實聯制登記-<span id="cusname2"></span>
+          </div>
+          <div class="header__desc">請確認id是否正確，謝謝！</div>
+        </div>
+      </div>
     </div>
-</body>
-<!-- site_url 為返回assets資料夾路徑 -->
-<script src="{{ '/js/jquery.min.js'|site_url }}"></script>
-<script src="{{ '/js/qrcode.min.js'|site_url }}"></script>
-<script src="{{ '/js/axios.min.js'|site_url }}"></script>
-<script src="{{ '/js/index.js'|site_url }}"></script>
-<script>
+  </body>
+  <!-- site_url 為返回assets資料夾路徑 -->
+  <script src="{{ '/js/jquery.min.js'|site_url }}"></script>
+  <script src="{{ '/js/qrcode.min.js'|site_url }}"></script>
+  <script src="{{ '/js/axios.min.js'|site_url }}"></script>
+  <script src="{{ '/js/index.js'|site_url }}"></script>
+  <script>
     //php 返回診所名稱和id
     var customer_data = {
-        'cusname': "{{ data['cusname']|raw }}",
-        'cusid': "{{ data['cusid']|raw }}"
-    }
-    if(customer_data['cusname'] !== "") {
-        document.getElementById('cusname').innerHTML = customer_data['cusname']
-        document.getElementById('cusname2').innerHTML = customer_data['cusname']
+      cusname: "{{ data['cusname']|raw }}",
+      cusid: "{{ data['cusid']|raw }}",
+    };
+    if (customer_data['cusname'] !== '') {
+      document.getElementById('cusname').innerHTML = customer_data['cusname'];
+      document.getElementById('cusname2').innerHTML = customer_data['cusname'];
     } else {
-        $('#form').hide();
-        $('#error').show();
+      $('#form').hide();
+      $('#error').show();
     }
-    
-</script>
+  </script>
 </html>
