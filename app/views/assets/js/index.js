@@ -261,7 +261,7 @@ async function send() {
     }
 
     axios
-      .post(`/tocc/api/add?cusid=${customer_data.cusid}`, data)
+      .post(`/api/add?cusid=${customer_data.cusid}`, data)
       .then(function (response) {
         console.log(response);
         $('#form').hide();

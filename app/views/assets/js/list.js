@@ -38,7 +38,7 @@ function getList() {
   // const m = `${year}-${padLeft(month)}`;
   const m = $('#date').val();
   axios
-    .get(`/tocc/api/list?cusid=${customer_data.cusid}&month=${m}`)
+    .get(`/api/list?cusid=${customer_data.cusid}&month=${m}`)
     .then(function (response) {
       renderList(response.data.data);
       console.log(response);
