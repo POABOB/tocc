@@ -13,7 +13,7 @@ define('CORE', PPP.'/core');
 define('APP', PPP.'/app');
 //定義app常量
 define('MODULE','app');
-define('URL','');
+define('URL','/tocc');
 define('HTTP','http://');
 //DEBUG模式開關
 define('DEBUG', true);

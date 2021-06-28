@@ -100,7 +100,8 @@ class apiController extends \core\PPP {
                 "name" => $post["name"],
                 "cellphone" => $post["cellphone"],
                 "residence" => $post["residence"],
-                "identity" => $post["identity"], //0:就診, 1:陪同, 2:其他
+                "identity" => $post["identity"], //0:就診, 1:陪同, 2:其他, 3屏東枋山
+                "identity_other" => $post["identity_other"], //旅遊史備註
                 "travel_histroy" => $post["travel_histroy"], //0:無, 1=> 曾出國
                 "travel_country" => $post["travel_country"], //出國的國家名稱, history為1時必填
                 "travel_destination" => $post["travel_destination"], //旅遊地, history為2時必填
