@@ -494,7 +494,7 @@
   <script src="{{ '/js/jquery.min.js'|site_url }}"></script>
   <script src="{{ '/js/qrcode.min.js'|site_url }}"></script>
   <script src="{{ '/js/axios.min.js'|site_url }}"></script>
-  <script src="{{ '/js/index.js'|site_url }}"></script>
+  <script src="{{ '/js/index.js'|site_url }}?v={{ now|date('Ymd') }}"></script>
   <script>
     //php 返回診所名稱和id
     var customer_data = {
